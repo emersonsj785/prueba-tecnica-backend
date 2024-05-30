@@ -7,19 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.sintad.prueba.model.TipoContribuyente;
 import com.sintad.prueba.model.dto.TipoContribuyenteDto;
-import com.sintad.prueba.repository.TipoContribuyenteRepository;
+import com.sintad.prueba.repository.ITipoContribuyenteRepository;
 import com.sintad.prueba.service.ITipoContribuyenteService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class TipoContribuyenteServiceImpl implements ITipoContribuyenteService
 {
 
-    private final TipoContribuyenteRepository tipoContribuyenteRepository;
-
-    public TipoContribuyenteServiceImpl(TipoContribuyenteRepository tipoContribuyenteRepository)
-    {
-        this.tipoContribuyenteRepository = tipoContribuyenteRepository;
-    }
+    private final ITipoContribuyenteRepository tipoContribuyenteRepository;
 
     @Override
     public List<TipoContribuyenteDto> listarTodos()

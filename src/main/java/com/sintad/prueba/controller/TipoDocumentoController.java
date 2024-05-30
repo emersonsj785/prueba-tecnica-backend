@@ -9,7 +9,7 @@ import com.sintad.prueba.model.TipoDocumento;
 import com.sintad.prueba.service.impl.TipoDocumentoServiceImpl;
 
 @RestController
-@RequestMapping("/api/tipo-documento")
+@RequestMapping("/api/tipo-documentos")
 public class TipoDocumentoController extends GenericController<TipoDocumento, TipoDocumentoDto>
 {
     @Autowired

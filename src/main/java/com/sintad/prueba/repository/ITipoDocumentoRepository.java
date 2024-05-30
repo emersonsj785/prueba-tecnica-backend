@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sintad.prueba.model.TipoDocumento;
 
-public interface TipoDocumentoRepository extends JpaRepository<TipoDocumento, Long> 
+public interface ITipoDocumentoRepository extends JpaRepository<TipoDocumento, Long> 
 {
 
 }
