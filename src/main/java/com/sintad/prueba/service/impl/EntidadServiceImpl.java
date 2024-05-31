@@ -8,6 +8,8 @@ import com.sintad.prueba.model.Entidad;
 import com.sintad.prueba.model.TipoContribuyente;
 import com.sintad.prueba.model.TipoDocumento;
 import com.sintad.prueba.model.dto.EntidadDto;
+import com.sintad.prueba.model.dto.TipoContribuyenteDto;
+import com.sintad.prueba.model.dto.TipoDocumentoDto;
 import com.sintad.prueba.repository.IEntidadRepository;
 import com.sintad.prueba.repository.ITipoContribuyenteRepository;
 import com.sintad.prueba.repository.ITipoDocumentoRepository;
@@ -42,11 +44,15 @@ public class EntidadServiceImpl implements IEntidadService
         if (entidad.getEnTipoDocumento() != null)
         {
             entidadDto.setIdTipoDocumento(entidad.getEnTipoDocumento().getId());
+            entidadDto.setEnTipoDocumento(ClaseUtil.aDto(entidad.getEnTipoDocumento(), TipoDocumentoDto.class));
         }
         if (entidad.getEnTipoContribuyente() != null)
         {
             entidadDto.setIdTipoContribuyente(entidad.getEnTipoContribuyente().getId());
+            entidadDto.setEnTipoContribuyente(ClaseUtil.aDto(entidad.getEnTipoContribuyente(), TipoContribuyenteDto.class));
         }
+        
+        
         return entidadDto;
     }
 
@@ -88,12 +94,14 @@ public class EntidadServiceImpl implements IEntidadService
         if (entidad.getEnTipoDocumento() != null)
         {
             entidadRegistradaDto.setIdTipoDocumento(entidad.getEnTipoDocumento().getId());
+            entidadRegistradaDto.setEnTipoDocumento(ClaseUtil.aDto(entidad.getEnTipoDocumento(), TipoDocumentoDto.class));
         }
         
         // Si se proporcionó un ID de tipo de contribuyente, establecerlo en el DTO
         if (entidad.getEnTipoContribuyente() != null)
         {
             entidadRegistradaDto.setIdTipoContribuyente(entidad.getEnTipoContribuyente().getId());
+            entidadRegistradaDto.setEnTipoContribuyente(ClaseUtil.aDto(entidad.getEnTipoContribuyente(), TipoContribuyenteDto.class));
         }
         
         return entidadRegistradaDto;
@@ -143,11 +151,13 @@ public class EntidadServiceImpl implements IEntidadService
         if (entidadActualizada.getEnTipoDocumento() != null)
         {
             entidadActualizadaDto.setIdTipoDocumento(entidadActualizada.getEnTipoDocumento().getId());
+            entidadActualizadaDto.setEnTipoDocumento(ClaseUtil.aDto(entidadActualizada.getEnTipoDocumento(), TipoDocumentoDto.class));
         }
 
         if (entidadActualizada.getEnTipoContribuyente() != null)
         {
             entidadActualizadaDto.setIdTipoContribuyente(entidadActualizada.getEnTipoContribuyente().getId());
+            entidadActualizadaDto.setEnTipoContribuyente(ClaseUtil.aDto(entidadActualizada.getEnTipoContribuyente(), TipoContribuyenteDto.class));
         }
 
         return entidadActualizadaDto;

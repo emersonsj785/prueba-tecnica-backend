@@ -22,4 +22,8 @@ public class EntidadDto
 	private String telefono;
 	
 	private Integer estado;
+	
+	private TipoDocumentoDto enTipoDocumento;
+	
+	private TipoContribuyenteDto enTipoContribuyente;
 }
