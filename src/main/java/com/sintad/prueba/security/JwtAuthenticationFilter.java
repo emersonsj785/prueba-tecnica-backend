@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sintad.prueba.model.dto.ApiDto;
 import com.sintad.prueba.security.service.JwtServiceImpl;
+import com.sintad.prueba.util.ClaseUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -54,14 +54,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
 			if(authHeader != null && authHeader.startsWith("Bearer "))
 			{
 				token = authHeader.substring(7);
-				usuario = this.jwtService.extraerUsuario(token);
+				usuario = this.jwtService.getUser(token);
 			}
 			
 			if(usuario != null && SecurityContextHolder.getContext().getAuthentication() == null)
 			{
 				UserDetails userDetails = this.userDetailsService.loadUserByUsername(usuario);
 				
-					if(this.jwtService.validarToken(token, userDetails)) 
+					if(this.jwtService.validetToken(token, userDetails)) 
 					{
 						UsernamePasswordAuthenticationToken authToken= new UsernamePasswordAuthenticationToken(
 			                    userDetails,
@@ -82,33 +82,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
 			if (e instanceof ExpiredJwtException)
 			{	
 				response.setStatus(HttpStatus.FORBIDDEN.value());
-				writer.print(objectMapper.writeValueAsString(this.respuestaApi(String.valueOf(HttpStatus.FORBIDDEN.value()), "Token invalido", null)));
+				writer.print(objectMapper.writeValueAsString(ClaseUtil.respuestaApi(String.valueOf(HttpStatus.FORBIDDEN.value()), "Token invalido", null)));
 			}
 			else 
 			{
 				response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-				writer.print(objectMapper.writeValueAsString(this.respuestaApi(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Error desconocido", null)));
+				writer.print(objectMapper.writeValueAsString(ClaseUtil.respuestaApi(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), "Error desconocido", null)));
 			}
 			writer.flush();
 			return;
 		}
 		
 		filterChain.doFilter(request, response);
-	}
-	
-	/**
-     * Crea una respuesta API en formato JSON.
-     * @param codeStatus el código de estado HTTP
-     * @param mensaje el mensaje de respuesta
-     * @param data datos adicionales
-     */
-	private ApiDto respuestaApi(String codeStatus, String mensaje, String data)
-	{
-		return ApiDto.
-				builder().
-				codeStatus(codeStatus).
-				mensaje(mensaje).
-				data(data).
-				build();
 	}
 }

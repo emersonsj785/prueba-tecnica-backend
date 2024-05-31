@@ -1,0 +1,10 @@
+**--Consideraciones--**
+
+- La base de datos se llama: prueba_sintad .
+
+- Estoy usando Java 17.
+
+- El Token está como variable "TOKEN" en el Collection del Postman.
+
+- Para autenticarse se usa: usario: ADMIN, contrasenia: ADMIN (De igual forma está preescrito en el
+  collection del postman como "Login".

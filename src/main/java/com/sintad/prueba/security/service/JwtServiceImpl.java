@@ -62,17 +62,17 @@ public class JwtServiceImpl
 	/*
 	 	Validaciones de Token
 	 */
-	private Date obtenerExpiracion(String token)
+	private Date getExpired(String token)
 	{
 		return this.extraerClaim(token, Claims::getExpiration);
 	}
 	
 	private Boolean esTokenExpirado(String token)
 	{
-		return this.obtenerExpiracion(token).before(new Date());
+		return this.getExpired(token).before(new Date());
 	}
 	
-	public String extraerUsuario(String token) 
+	public String getUser(String token) 
 	{ 
         return extraerClaim(token, Claims::getSubject); 
     } 
@@ -83,9 +83,9 @@ public class JwtServiceImpl
      * @param detallesUsuario los detalles del usuario
      * @return verdadero si el token es válido, falso en caso contrario
      */
-	public Boolean validarToken(String token, UserDetails detallesUsuario)
+	public Boolean validetToken(String token, UserDetails detallesUsuario)
 	{
-		String usuario = this.extraerUsuario(token);
+		String usuario = this.getUser(token);
 		return (usuario.equals(detallesUsuario.getUsername()) && !this.esTokenExpirado(token));
 	}
 }
